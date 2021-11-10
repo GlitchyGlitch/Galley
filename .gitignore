@@ -1,0 +1,15 @@
+*.mdf
+*.ldf
+*.sdi
+*.pem
+*.dblwr
+*.ibt
+*.cnf
+*.csv
+*.csm
+*.CSM
+*.CSV
+*.ibd
+**/binlog.*
+**/img/*
+**/mysql/data

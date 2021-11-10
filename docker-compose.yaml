@@ -1,0 +1,45 @@
+version: "3.5"
+
+services:
+  gallery-app:
+    image: php:8.0-fpm
+    environment:
+      DB_TYPE: mysql
+      DB_HOST: gallery-db:3306
+      DB_NAME: gallery
+      DB_USERNAME: root
+      DB_PASSWORD: gallery
+    container_name: gallery-app
+    expose:
+      - "9000"
+    # restart: always
+    working_dir: /usr/src/gallery,
+    volumes:
+      - ./gallery:/usr/src/gallery
+      - ./gallery/img:/var/lib/img
+    depends_on:
+      - gallery-db
+    command: 'bash -c "chmod -R 777 /var/lib/img && docker-php-ext-install pdo pdo_mysql && php-fpm && exec @$$"'
+
+  gallery-nginx:
+    image: nginx:alpine
+    container_name: gallery-nginx
+    # restart: always
+
+    depends_on:
+      - gallery-app
+    ports:
+      - "8080:80"
+    volumes:
+      - ./gallery:/usr/src/gallery
+      - ./nginx:/etc/nginx/conf.d
+
+  gallery-db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: gallery
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./mysql/migrations:/docker-entrypoint-initdb.d
+      - ./mysql/data:/var/lib/mysql

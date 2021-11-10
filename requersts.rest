@@ -1,0 +1,12 @@
+GET http://localhost:8080/api/v1/photos HTTP/1.1
+
+POST http://localhost:8080/api/v1/photos HTTP/1.1
+content-type: application/json
+
+  {
+    "owner": "7fba41eb-61fe-4c95-9bfe-5c4ee1fd076a",
+    "mime": "image\/png",
+    "base64Img": "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="
+  }
+
+GET  http://localhost:8080/img/d84fcfb9-f6a4-4927-b41f-5b1992977722 HTTP/1.1
