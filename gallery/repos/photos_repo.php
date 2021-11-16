@@ -29,6 +29,25 @@ class PhotoRepository
     }
   }
 
+  public function get_img_by_id($id)
+  {
+    $query = 'SELECT path, mime FROM photos WHERE id=uuid_to_bin(:id)'; //FIXME: returns empty
+    try {
+      $sth = $this->dbh->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
+      $sth->execute([
+        ':id' => $id,
+      ]);
+      $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+      $mime = $result[0]['mime'] ?? null;
+      $path = $result[0]['path'] ?? null;
+      // TODO: Handle errors
+      $img = file_get_contents('/var/lib' . $path);
+      return [$img, $mime];
+    } catch (PDOException $e) {
+      exit($e->getMessage()); //TODO: proper errors
+    }
+  }
+
   public function insert($photo) //TODO: change it to transaction.
   {
     $photo->id = gen_uuidv4();
@@ -37,8 +56,6 @@ class PhotoRepository
 
     $photo->path = $path;
     $binary_img = base64_decode($photo->base64_img);
-    print_r($photo->base64_img);
-
     // TODO: validate data
     // Put it into db
     $insert_query = 'INSERT INTO photos (id, path, mime, owner) VALUES (uuid_to_bin(:id), :path, :mime, uuid_to_bin(:owner))';

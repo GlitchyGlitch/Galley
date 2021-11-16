@@ -2,11 +2,11 @@ GET http://localhost:8080/api/v1/photos HTTP/1.1
 
 POST http://localhost:8080/api/v1/photos HTTP/1.1
 content-type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZmJhNDFlYi02MWZlLTRjOTUtOWJmZS01YzRlZTFmZDA3NmEiLCJleHAiOjExNTE2MjM5MDIyfQ.eNPqAwZzzPW8o8F8gi6puXhnxmdX6aRiJf8iuqOPcLE
 
   {
-    "owner": "7fba41eb-61fe-4c95-9bfe-5c4ee1fd076a",
     "mime": "image\/png",
-    "base64Img": "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="
+    "base64_img": "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="
   }
 
-GET  http://localhost:8080/img/d84fcfb9-f6a4-4927-b41f-5b1992977722 HTTP/1.1
+GET  http://localhost:8080/img/ac53884f-1b0d-4396-b981-e060720e7ce7 HTTP/1.1

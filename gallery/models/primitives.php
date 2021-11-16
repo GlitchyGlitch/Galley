@@ -9,7 +9,7 @@ class Model
 
   public function json_dump()
   {
-    return json_encode($this);
+    return json_encode($this->array_dump());
   }
 
   public function json_load($json)

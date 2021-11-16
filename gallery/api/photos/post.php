@@ -5,9 +5,10 @@ require_once "../../endpoint.php";
 require_once "../../exceptions.php";
 
 $ep = new Endpoint();
+$ep->require_user();
 $photo = new Photo();
 try {
-  $photo->json_load(file_get_contents("php://input"));
+  $photo->json_load($ep->body);
 } catch (LoadingException $e) {
   $ep->send_code(400);
 }
