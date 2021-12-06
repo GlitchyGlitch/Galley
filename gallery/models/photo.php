@@ -4,8 +4,11 @@ require_once "primitives.php";
 
 class Photo extends Model
 {
+  public $id;
+  public $created_at;
   public $path;
-  public $owner;
+  public $owner_id;
+  public $album_id;
   public $mime;
   public $base64_img;
 }

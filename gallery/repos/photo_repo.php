@@ -25,7 +25,7 @@ class PhotoRepository
       $photo_list->array_load($result);
       return $photo_list;
     } catch (PDOException $e) {
-      exit($e->getMessage()); //TODO: proper errors
+      exit($e->getMessage()); //TODO: Hendle errors properly
     }
   }
 
@@ -44,11 +44,11 @@ class PhotoRepository
       $img = file_get_contents('/var/lib' . $path);
       return [$img, $mime];
     } catch (PDOException $e) {
-      exit($e->getMessage()); //TODO: proper errors
+      exit($e->getMessage()); //TODO: Hendle errors properly
     }
   }
 
-  public function insert($photo) //TODO: change it to transaction.
+  public function insert($photo) //TODO: Change it to transaction. Handle errors
   {
     $photo->id = gen_uuidv4();
     $path = '/img/' . $photo->id;
@@ -57,14 +57,16 @@ class PhotoRepository
     $photo->path = $path;
     $binary_img = base64_decode($photo->base64_img);
     // TODO: validate data
+
     // Put it into db
-    $insert_query = 'INSERT INTO photos (id, path, mime, owner) VALUES (uuid_to_bin(:id), :path, :mime, uuid_to_bin(:owner))';
+    $insert_query = 'INSERT INTO photos (id, path, mime, owner_id, album_id) VALUES (uuid_to_bin(:id), :path, :mime, uuid_to_bin(:owner_id), uuid_to_bin(:album_id))';
     $sth = $this->dbh->prepare($insert_query);
     $sth->execute([
       ':id' => $photo->id,
-      ':owner' => $photo->owner,
       ':path' => $photo->path,
       ':mime' => $photo->mime,
+      ':owner_id' => $photo->owner_id,
+      ':album_id' => $photo->album_id,
     ]);
     // Put it into fs.
     if (!$handle = fopen($abs_path, 'wb')) {

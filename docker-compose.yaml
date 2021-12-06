@@ -32,7 +32,8 @@ services:
       - "8080:80"
     volumes:
       - ./gallery:/usr/src/gallery
-      - ./nginx:/etc/nginx/conf.d
+      - ./nginx/static:/usr/src/gallery_static
+      - ./nginx/config:/etc/nginx/conf.d
 
   gallery-db:
     image: mysql:latest

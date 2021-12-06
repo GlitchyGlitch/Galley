@@ -1,6 +1,5 @@
 <?php
 
-
 require_once "../../endpoint.php";
 require_once "../../exceptions.php";
 
@@ -13,7 +12,7 @@ try {
   $ep->send_code(400);
 }
 
-$photo->owner = $ep->user_id;
-$photo = $ep->repos->photosRepo->insert($photo);
+$photo->owner_id = $ep->user_id;
+$photo = $ep->repos->photoRepo->insert($photo);
 
 $ep->send($photo->json_dump());

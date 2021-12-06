@@ -1,8 +1,12 @@
 <?php
 
 require_once 'data/database.php';
-require_once 'repos/photos_repo.php';
+require_once 'repos/photo_repo.php';
+require_once 'repos/album_repo.php';
 require_once 'repos/user_repo.php';
+require_once 'repos/auth_repo.php';
+require_once 'repos/comment_repo.php';
+require_once 'repos/rate_repo.php';
 require_once 'jwt.php';
 
 
@@ -56,7 +60,7 @@ class Endpoint
     }
 
     $payload = jwt_extract_payload($token);
-    $role = $this->repos->userRepo->get_role($payload->sub);
+    $role = $this->repos->authRepo->get_role($payload->sub);
     if ($role === null) {
       return;
     }
@@ -76,16 +80,18 @@ class Endpoint
   public function require_user()
   {
     if (is_null($this->user_id) || !($this->user_role === "regular" || $this->user_role === "admin")) {
-      $this->send_code(403);
+      $this->send_code(401);
     }
   }
-  public function require_admin()
+  public function require_admin() // TODO: switch to preventive coding with default state of unauthorized
   {
-    if ($this->user_id === null && $this->user_role !== 'admin') {
+    if (is_null($this->user_id)) {
+      $this->send_code(401);
+    }
+    if ($this->user_role !== 'admin') {
       $this->send_code(403);
     }
   }
-
   protected function __clone()
   {
   }
@@ -93,11 +99,19 @@ class Endpoint
 
 class RepoWrapper
 {
-  public $photosRepo;
+  public $photoRepo;
+  public $albumRepo;
   public $userRepo;
+  public $authRepo;
+  public $commentRepo;
+  public $ratesRepo;
   public function __construct($dbh)
   {
-    $this->photosRepo = new PhotoRepository($dbh);
+    $this->photoRepo = new PhotoRepository($dbh);
+    $this->albumRepo = new AlbumRepository($dbh);
     $this->userRepo = new UserRepository($dbh);
+    $this->authRepo = new AuthRepository($dbh);
+    $this->commentRepo = new CommentRepository($dbh);
+    $this->rateRepo = new RateRepository($dbh);
   }
 }

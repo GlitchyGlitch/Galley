@@ -1,12 +1,62 @@
 GET http://localhost:8080/api/v1/photos HTTP/1.1
 
+GET http://localhost:8080/api/v1/albums HTTP/1.1
+
+GET  http://localhost:8080/img/ HTTP/1.1
+
+POST http://localhost:8080/api/v1/login
+content-type: application/json
+  
+  {
+    "email": "example@example.com",
+    "password": "admin"
+  }
+
 POST http://localhost:8080/api/v1/photos HTTP/1.1
 content-type: application/json
-authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZmJhNDFlYi02MWZlLTRjOTUtOWJmZS01YzRlZTFmZDA3NmEiLCJleHAiOjExNTE2MjM5MDIyfQ.eNPqAwZzzPW8o8F8gi6puXhnxmdX6aRiJf8iuqOPcLE
-
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6Imp3dCJ9.eyJzdWIiOiI3ZmJhNDFlYi02MWZlLTRjOTUtOWJmZS01YzRlZTFmZDA3NmEiLCJleHAiOjE2MzgyMjAyMjd9.yetsW_cgcznG7JMeoXc38RgntmL3YhUnJGdRly8ZQMc
+  
   {
     "mime": "image\/png",
     "base64_img": "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="
   }
 
-GET  http://localhost:8080/img/ac53884f-1b0d-4396-b981-e060720e7ce7 HTTP/1.1
+POST http://localhost:8080/api/v1/albums HTTP/1.1
+content-type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZmJhNDFlYi02MWZlLTRjOTUtOWJmZS01YzRlZTFmZDA3NmEiLCJleHAiOjk1MTYyMzkwMjJ9.OuFH6oiYVaBkFV2XZBb_M2CWNYw78tcAGMescPnN0c8
+  
+  {
+    "name": "Just Album "
+  }
+
+GET  http://localhost:8080/api/v1/photos/ebc534ab-89a9-48bd-a141-adc09dabba8c/comments HTTP/1.1
+
+POST http://localhost:8080/api/v1/photos/ebc534ab-89a9-48bd-a141-adc09dabba8c/comments HTTP/1.1
+content-type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZmJhNDFlYi02MWZlLTRjOTUtOWJmZS01YzRlZTFmZDA3NmEiLCJleHAiOjk1MTYyMzkwMjJ9.OuFH6oiYVaBkFV2XZBb_M2CWNYw78tcAGMescPnN0c8
+  
+  {
+    "content": "just comment for a photo"
+  }
+
+POST http://localhost:8080/api/v1/users HTTP/1.1
+content-type: application/json
+# authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZmJhNDFlYi02MWZlLTRjOTUtOWJmZS01YzRlZTFmZDA3NmEiLCJleHAiOjk1MTYyMzkwMjJ9.OuFH6oiYVaBkFV2XZBb_M2CWNYw78tcAGMescPnN0c8
+  
+  {
+    "first_name": "Jane",
+    "last_name": "Doe",
+    "password": "admin",
+    "email": "janedoe@example.com",
+    "role":"regular"
+  }
+
+GET http://localhost:8080/api/v1/photos/ebc534ab-89a9-48bd-a141-adc09dabba8c/rates HTTP/1.1
+
+POST http://localhost:8080/api/v1/photos/ebc534ab-89a9-48bd-a141-adc09dabba8c/rates HTTP/1.1
+content-type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZmJhNDFlYi02MWZlLTRjOTUtOWJmZS01YzRlZTFmZDA3NmEiLCJleHAiOjk1MTYyMzkwMjJ9.OuFH6oiYVaBkFV2XZBb_M2CWNYw78tcAGMescPnN0c8
+  
+  {
+    "stars": 5
+  }

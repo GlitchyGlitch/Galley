@@ -1,15 +1,19 @@
 <?php
-function generate_jwt($headers, $payload, $secret = 'secret')
+// TODO: Export it to some kind of config.
+define('DEFAULT_JWT_SECRET', 'wXyJBLcggQ9HVwy0zLp9cAk6I6Vj8uvvPrRtzy5TEqg4GfAfePcEyaXw2yjPVVNO1HLTy5llBqRMzkIy6t0opGDe1QQvLTcEQJ3tLjXMyP4OTiLmnuCwPGDDsa4fcUcL5BEI1INQcery6CurD7eCRT48BYgS5isW6CF8MX2KJFTsOcFLcttJWYnM2VXMO7b2u2s25XTORzNAjqtux6wHNJWl3T5doC0SUBwTpb4XBhUsApNk7lhSsdRXyjM4ZKpt');
+
+
+function generate_jwt($sub, $exp = (7 * 24 * 60 * 60), $headers = ['alg' => 'HS256', 'typ' => 'jwt'],  $secret = DEFAULT_JWT_SECRET)
 {
+  $exp += time();
   $headers_encoded = base64url_encode(json_encode($headers));
 
-  $payload_encoded = base64url_encode(json_encode($payload));
+  $payload_encoded = base64url_encode(json_encode(['sub' => $sub, 'exp' => $exp]));
 
   $signature = hash_hmac('SHA256', "$headers_encoded.$payload_encoded", $secret, true);
   $signature_encoded = base64url_encode($signature);
 
   $jwt = "$headers_encoded.$payload_encoded.$signature_encoded";
-
   return $jwt;
 }
 
@@ -20,8 +24,9 @@ function jwt_extract_payload($jwt)
   return json_decode($payload);
 }
 
-function is_jwt_valid($jwt, $secret = 'secret')
+function is_jwt_valid($jwt, $secret = DEFAULT_JWT_SECRET)
 {
+  // TODO: Handle invalid JWTs
   $tokenParts = explode('.', $jwt);
   $header = base64_decode($tokenParts[0]);
   $payload = base64_decode($tokenParts[1]);
