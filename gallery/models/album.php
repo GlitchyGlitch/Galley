@@ -10,22 +10,22 @@ class Album extends Model implements ModelInterface
   public $owner_id;
   public $created_at;
 
-  public function validate(bool $input_only): bool
+  public function validate(bool $input_only = false): bool
   {
     if ($input_only && $this->validate_name()) {
       return true;
     }
-    if ($this->validate_name() && isValidUuid($this->id) && isValidUuid($this->owner_id) && isValidUuid($this->id)) { // TODO: Add created_at validation later
+    if ($this->validate_name() && is_valid_uuid($this->id) && is_valid_uuid($this->owner_id) && is_valid_uuid($this->id)) { // TODO: Add created_at validation later
       return true;
     }
     return false;
   }
   public function validate_name(): bool
   {
-    if (strlen($this->name) > 255 || preg_match('/[^\x20-\x7f]/', $this->name)) {
-      return false;
+    if (!(strlen($this->name) > 255) && !preg_match('/[^\x20-\x7f]/', $this->name)) {
+      return true;
     }
-    return true;
+    return false;
   }
 }
 

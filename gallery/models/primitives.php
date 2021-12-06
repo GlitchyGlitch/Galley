@@ -80,7 +80,7 @@ class ModelList
 
 interface ModelInterface
 {
-  public function validate(bool $input_only): bool;
+  public function validate(bool $input_only = false): bool;
   public function json_dump(): string;
   public function json_load(string $json);
   public function array_dump(): array;

@@ -10,7 +10,7 @@ class RateRepository
   {
     $this->dbh = $dbh;
   }
-  public function get_by_photo_id($id, $limit = 50, $offset = 0)
+  public function get_by_photo_id(string $id, int $limit = 50, int $offset = 0): RateList
   {
     $query = 'SELECT * FROM rates WHERE photo_id = uuid_to_bin(:id) ORDER BY created_at DESC LIMIT :offset, :limit'; //FIXME: returns empty
     try {
@@ -30,7 +30,7 @@ class RateRepository
     }
   }
 
-  public function insert($rate)
+  public function insert(Rate $rate): Rate
   {
     $check_query = 'SELECT COUNT(id) FROM rates WHERE photo_id = uuid_to_bin(:photo_id) AND owner_id = uuid_to_bin(:owner_id)';
     $sth = $this->dbh->prepare($check_query);

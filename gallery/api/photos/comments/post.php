@@ -11,6 +11,10 @@ try {
   $ep->send_code(400);
 }
 
+if (!$comment->validate(true)) {
+  $ep->send_code(400);
+}
+
 $comment->photo_id = $ep->resource_id;
 $comment->owner_id = $ep->user_id;
 $comment = $ep->repos->commentRepo->insert($comment);

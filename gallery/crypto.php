@@ -25,7 +25,7 @@ function bin_to_uuid($bin)
   return join("-", unpack("H8time_low/H4time_mid/H4time_hi/H4clock_seq_hi/H12clock_seq_low", $bin));
 }
 
-function isValidUuid($uuid)
+function is_valid_uuid($uuid)
 {
   if (is_string($uuid) && (preg_match('/^[a-f\d]{8}(-[a-f\d]{4}){4}[a-f\d]{8}$/i', $uuid) === 1)) {
     return true;

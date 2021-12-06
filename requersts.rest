@@ -26,7 +26,7 @@ content-type: application/json
 authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZmJhNDFlYi02MWZlLTRjOTUtOWJmZS01YzRlZTFmZDA3NmEiLCJleHAiOjk1MTYyMzkwMjJ9.OuFH6oiYVaBkFV2XZBb_M2CWNYw78tcAGMescPnN0c8
   
   {
-    "name": "Just Album "
+    "name": "Just Album"
   }
 
 GET  http://localhost:8080/api/v1/photos/ebc534ab-89a9-48bd-a141-adc09dabba8c/comments HTTP/1.1

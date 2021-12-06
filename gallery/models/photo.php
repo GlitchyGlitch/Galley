@@ -13,7 +13,7 @@ class Photo extends Model
   public $base64_img;
 }
 
-class PhotoList extends ModelList
+class PhotoList extends ModelList // TODO: Add validation
 {
   public function __construct()
   {
