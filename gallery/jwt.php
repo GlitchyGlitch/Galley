@@ -24,7 +24,7 @@ function jwt_extract_payload($jwt)
   return json_decode($payload);
 }
 
-function is_jwt_valid($jwt, $secret = DEFAULT_JWT_SECRET)
+function is_valid_jwt($jwt, $secret = DEFAULT_JWT_SECRET)
 {
   // TODO: Handle invalid JWTs
   $tokenParts = explode('.', $jwt);

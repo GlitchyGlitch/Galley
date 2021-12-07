@@ -11,6 +11,9 @@ try {
 } catch (LoadingException $e) {
   $ep->send_code(400);
 }
+if (!$photo->validate(true)) {
+  $ep->send_code(400);
+}
 
 $photo->owner_id = $ep->user_id;
 $photo = $ep->repos->photoRepo->insert($photo);

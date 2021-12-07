@@ -1,6 +1,7 @@
 <?php
 
-require_once "primitives.php";
+require_once __DIR__ . "/primitives.php";
+require_once __DIR__ . "/../crypto.php";
 
 class Comment extends Model implements ModelInterface
 {

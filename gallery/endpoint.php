@@ -55,7 +55,7 @@ class Endpoint
       $token = $matches[1];
     }
 
-    if (!is_jwt_valid($token)) {
+    if (!is_valid_jwt($token)) {
       return;
     }
 

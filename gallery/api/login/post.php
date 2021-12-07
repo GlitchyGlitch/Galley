@@ -15,6 +15,7 @@ if (!$login_input->validate(true)) {
   $ep->send_code(400);
 }
 
+$login = $ep->repos->authRepo->authenticate($login_input);
 if (is_null($login)) {
   $ep->send_code(401);
 };
