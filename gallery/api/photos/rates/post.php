@@ -11,6 +11,9 @@ try {
 } catch (LoadingException $e) {
   $ep->send_code(400);
 }
+if (!$rate->validate(true)) {
+  $ep->send_code(400);
+}
 
 $rate->photo_id = $ep->resource_id;
 $rate->owner_id = $ep->user_id;
