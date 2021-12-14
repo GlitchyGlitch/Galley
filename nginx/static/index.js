@@ -1,6 +1,7 @@
 "use strict";
 
 import Router from "./router.js";
+import registerMain from "./views/register.js";
 
 const fetchView = async (viewPath) => {
   const req = new Request(viewPath, {
@@ -28,6 +29,7 @@ const main = () => {
     .add(/register/, async () => {
       routerView.innerHTML = "";
       const view = await fetchView("views/register.html");
+      registerMain();
       routerView.append(view);
     })
     .add("", async () => {
