@@ -1,10 +1,19 @@
-class Router {
-  routes = [];
+/**
+ * @description
+ * Router class, handels URL management
+ *
+ * @param {Object} options
+ * @param {String} options.root     URL root
+ * @param {String} options.viewport Router's viewport
+ */
 
+class Router {
   root = "/";
+  routes = [];
 
   constructor(options) {
     if (options && options.root) this.root = options.root;
+    this.options = options;
     this.listen();
   }
 
@@ -34,6 +43,13 @@ class Router {
   listen = () => {
     clearInterval(this.timer);
     this.timer = setInterval(this.interval, 50);
+  };
+
+  renderViewport = (viewNode) => {
+    while (this.options.viewport.firstChild) {
+      this.options.viewport.removeChild(this.options.viewport.firstChild);
+    }
+    this.options.viewport.append(viewNode);
   };
 
   interval = () => {

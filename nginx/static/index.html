@@ -31,6 +31,13 @@
       body {
         font-family: "Open Sans", sans-serif;
       }
+
+      .trans-opacity {
+        transition: opacity 0.25s ease-in-out !important;
+        -moz-transition: opacity 0.25s ease-in-out !important;
+        -webkit-transition: opacity 0.25s ease-in-out !important;
+      }
+
       .ls-5 {
         letter-spacing: 0.05em;
       }
@@ -38,6 +45,9 @@
         line-height: initial;
       }
       @media (min-width: 576px) {
+        .w-sm-100 {
+          width: 100% !important;
+        }
         .border-sm-top {
           border-top: 1px solid #e3e7eb !important;
         }

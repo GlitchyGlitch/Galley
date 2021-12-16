@@ -1,41 +1,29 @@
 "use strict";
 
-import Router from "./router.js";
-import registerMain from "./views/register.js";
-
-const fetchView = async (viewPath) => {
-  const req = new Request(viewPath, {
-    method: "GET",
-  });
-
-  let response = await fetch(req);
-  response = await response.text();
-  const element = document.createElement("div");
-  element.innerHTML = response;
-  return element;
-};
+import Router from "/modules/router.js";
+import RegisterView from "/views/register/register.js";
+import LoginView from "/views/login/login.js";
+import HomeView from "/views/home/home.js";
 
 const main = () => {
-  const routerView = document.querySelector("[router-view]");
-
-  const router = new Router();
+  const routerViewport = document.querySelector("[router-view]");
+  const router = new Router({ viewport: routerViewport });
 
   router
     .add(/login/, async () => {
-      routerView.innerHTML = "";
-      const view = await fetchView("views/login.html");
-      routerView.append(view);
+      LoginView.routerViewport(routerViewport);
+      await LoginView.init();
+      router.renderViewport(LoginView.node);
     })
     .add(/register/, async () => {
-      routerView.innerHTML = "";
-      const view = await fetchView("views/register.html");
-      registerMain();
-      routerView.append(view);
+      RegisterView.routerViewport(routerViewport);
+      await RegisterView.init();
+      router.renderViewport(RegisterView.node);
     })
     .add("", async () => {
-      routerView.innerHTML = "";
-      const view = await fetchView("views/home.html");
-      routerView.append(view);
+      HomeView.routerViewport(routerViewport);
+      await HomeView.init();
+      router.renderViewport(HomeView.node);
     });
 };
 document.addEventListener("DOMContentLoaded", main);
