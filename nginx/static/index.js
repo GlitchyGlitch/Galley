@@ -4,10 +4,12 @@ import Router from "/modules/router.js";
 import RegisterView from "/views/register/register.js";
 import LoginView from "/views/login/login.js";
 import HomeView from "/views/home/home.js";
+import API from "/modules/api.js";
 
 const main = () => {
   const routerViewport = document.querySelector("[router-view]");
   const router = new Router({ viewport: routerViewport });
+  const api = new API();
 
   router
     .add(/login/, async () => {
@@ -22,7 +24,7 @@ const main = () => {
     })
     .add("", async () => {
       HomeView.routerViewport(routerViewport);
-      await HomeView.init();
+      await HomeView.init({ api });
       router.renderViewport(HomeView.node);
     });
 };

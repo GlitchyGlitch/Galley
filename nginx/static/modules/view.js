@@ -7,7 +7,7 @@ const createView = (options) => {
 
 /**
  * @description
- * Main view class
+ * Main view class.
  *
  * @param {Object} options
  * @param {String} options.htmlFile       Main HTML file for view
@@ -30,16 +30,20 @@ class View {
       ]);
   }
 
-  async init() {
+  init = async (mainOptions) => {
+    mainOptions = mainOptions || {};
     await this.fetchNode();
-    this.options.routerViewport.addEventListener("DOMNodeInserted", () => {
-      this.options.mainFunc(this.node); // FIXME: check if it makes sense
+    const observer = new MutationObserver((mutations) => {
+      for (const { type } of mutations)
+        if (type === "childList") this.options.mainFunc(this.node, mainOptions);
     });
+
+    observer.observe(this.options.routerViewport, { childList: true });
     return this.node;
-  }
+  };
 
   fetchNode = async () => {
-    // TODO: cache
+    // TODO: Do proper configuration of request
     const req = new Request(this.htmlFile, {
       method: "GET",
     });

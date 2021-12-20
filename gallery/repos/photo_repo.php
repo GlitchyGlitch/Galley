@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '../../models/photo.php';
 require_once __DIR__ . '../../crypto.php';
+require_once __DIR__ . '../../images.php';
 
 class PhotoRepository
 {
@@ -29,7 +30,7 @@ class PhotoRepository
     }
   }
 
-  public function get_img_by_id($id)
+  public function get_img_by_id($id, $width = 0, $height = 0)
   {
     $query = 'SELECT path, mime FROM photos WHERE id=uuid_to_bin(:id)'; //FIXME: returns empty
     try {
@@ -42,6 +43,10 @@ class PhotoRepository
       $path = $result[0]['path'] ?? null;
       // TODO: Handle errors
       $img = file_get_contents('/var/lib' . $path);
+      if ($width !== 0 || $height !== 0) {
+        $img = img_resize($img, $width, $height);
+      }
+
       return [$img, $mime];
     } catch (PDOException $e) {
       exit($e->getMessage()); //TODO: Hendle errors properly

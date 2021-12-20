@@ -36,7 +36,7 @@ class Photo extends Model implements ModelInterface
     }
     return false;
   }
-  public function validate_mime(): bool
+  public function validate_mime(): bool // TODO: Chcek with suported list
   {
     if (!(strlen($this->mime) > 255) && preg_match('/image\/[A-Za-z\-\+]{1,}/', $this->mime)) {
       return true;

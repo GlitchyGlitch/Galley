@@ -1,4 +1,5 @@
 <?php
+ini_set('memory_limit', '536870912');
 
 require_once 'data/database.php';
 require_once 'repos/photo_repo.php';

@@ -19,7 +19,7 @@ services:
       - ./gallery/img:/var/lib/img
     depends_on:
       - gallery-db
-    command: 'bash -c "chmod -R 777 /var/lib/img && docker-php-ext-install pdo pdo_mysql && php-fpm && exec @$$"'
+    command: 'bash -c "chmod -R 777 /var/lib/img && apt update && apt install -y zlib1g-dev libpng-dev libwebp-dev libjpeg-dev libfreetype6-dev && docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg --with-webp && docker-php-ext-install pdo pdo_mysql gd && php-fpm && exec @$$"'
 
   gallery-nginx:
     image: nginx:alpine
