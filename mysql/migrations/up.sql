@@ -58,4 +58,4 @@ ALTER TABLE `albums` ADD FOREIGN KEY (`owner_id`) REFERENCES `users` (`id`);
 
 
 INSERT INTO `users` (id, first_name, last_name, email, passwd_hash, role) VALUE (uuid_to_bin("7fba41eb-61fe-4c95-9bfe-5c4ee1fd076a"), "John", "Doe", "example@example.com", "$2a$12$juN33VDOusigZ7zhNscntemgVxC0F5/NasF5NwCAavaZwC/lmEpua", "admin");
-INSERT INTO `photos` (id, path, owner_id, mime) VALUE (uuid_to_bin("ebc534ab-89a9-48bd-a141-adc09dabba8c"),  "/img/ebc534ab-89a9-48bd-a141-adc09dabba8c", uuid_to_bin("7fba41eb-61fe-4c95-9bfe-5c4ee1fd076a"), "image/png");
+INSERT INTO `photos` (id, path, owner_id, mime) VALUE (uuid_to_bin("ebc534ab-89a9-48bd-a141-adc09dabba8c"),  "/img/ebc534ab-89a9-48bd-a141-adc09dabba8c", uuid_to_bin("7fba41eb-61fe-4c95-9bfe-5c4ee1fd076a"), "image/jpeg");

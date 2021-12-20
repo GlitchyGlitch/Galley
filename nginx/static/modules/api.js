@@ -27,6 +27,22 @@ class API {
     const resp = await fetch(req);
     return resp.json();
   };
+
+  login = async (email, password) => {
+    let resp = null;
+    const path = joinPaths([this.apiPath, "login"]);
+    console.log(JSON.stringify({ email, password }));
+    const req = new Request(path, {
+      method: "POST",
+      cache: "default",
+      body: JSON.stringify({ email, password }),
+    });
+    resp = await fetch(req);
+    if (!resp.ok) {
+      return;
+    }
+    return resp.json();
+  };
 }
 
 export default API; // TODO: Do proper configuration of requests
