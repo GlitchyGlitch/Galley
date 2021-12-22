@@ -7,12 +7,17 @@ export default View({
     const photos = await api.fetchPhotos();
     const cards = [];
     for (const photo of photos) {
+      console.log(photo);
       const el = document.createElement("div");
-      el.classList.add("col-4", "m-3");
-      el.style.background = `url("${photo.path}?height=240") center center / cover`;
+      const inner = document.createElement("img");
+      inner.src = photo.path;
+      inner.classList.add("w-100", "h-100");
+      inner.style.objectFit = "cover";
+      el.appendChild(inner);
+      el.classList.add("col-12", "col-md-6", "col-xl-4", "py-3", "px-md-3");
       el.style.height = "240px";
       cards.push(el);
     }
-    wrapper.appendChild(...cards);
+    cards.map((card) => wrapper.appendChild(card)); //TODO: Make it appear at once
   },
 });

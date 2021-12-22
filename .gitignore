@@ -13,3 +13,6 @@
 **/binlog.*
 **/img/*
 **/mysql/data
+!**/img/e7e66379-f834-4f32-b117-7d72c3077ebd
+!**/img/ebc534ab-89a9-48bd-a141-adc09dabba8c
+!**/img/04eb97b5-5456-4150-994d-70db44203125
