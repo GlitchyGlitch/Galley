@@ -42,6 +42,27 @@ class API {
     }
     return resp.json();
   };
+
+  register = async (email, password, firstName, lastName) => {
+    let resp = null;
+    const path = joinPaths([this.apiPath, "users"]);
+    const req = new Request(path, {
+      method: "POST",
+      cache: "default",
+      body: JSON.stringify({
+        email,
+        password,
+        first_name: firstName,
+        last_name: lastName,
+        role: "regular",
+      }),
+    });
+    resp = await fetch(req);
+    if (!resp.ok) {
+      return;
+    }
+    return resp.json();
+  };
 }
 
 export default API; // TODO: Do proper configuration of requests
