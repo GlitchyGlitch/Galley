@@ -2,13 +2,15 @@ import View from "/modules/view.js";
 
 export default View({
   name: "register",
-  mainFunc(root) {
+  mainFunc(root, { cookieManager }) {
+    if (cookieManager.getJWT()) {
+      window.location.replace("/");
+    }
+
     const nextView = () => {
-      formViewport.classList.toggle("overflow-hidden");
-      formViewport.classList.toggle("overflow-scroll");
+      formViewport.classList.toggle("overflow-hidden", "overflow-scroll");
       formViewport.scrollBy(formViewport.offsetWidth, 0);
-      formViewport.classList.toggle("overflow-hidden");
-      formViewport.classList.toggle("overflow-scroll");
+      formViewport.classList.toggle("overflow-hidden", "overflow-scroll");
     };
     const header = root.querySelector("#header");
     const nextButton = root.querySelector("#next");

@@ -26,215 +26,9 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
-    <title>Document</title>
-    <style>
-      body {
-        font-family: "Open Sans", sans-serif;
-      }
-
-      .trans-opacity {
-        transition: opacity 0.25s ease-in-out !important;
-        -moz-transition: opacity 0.25s ease-in-out !important;
-        -webkit-transition: opacity 0.25s ease-in-out !important;
-      }
-
-      .ls-5 {
-        letter-spacing: 0.05em;
-      }
-      .bi:before {
-        line-height: initial;
-      }
-      @media (min-width: 576px) {
-        .w-sm-100 {
-          width: 100% !important;
-        }
-        .border-sm-top {
-          border-top: 1px solid #e3e7eb !important;
-        }
-        .border-sm-right {
-          border-right: 1px solid #e3e7eb !important;
-        }
-        .border-sm-bottom {
-          border-bottom: 1px solid #e3e7eb !important;
-        }
-        .border-sm-left {
-          border-left: 1px solid #e3e7eb !important;
-        }
-        .border-sm-top-0 {
-          border-top: 0 !important;
-        }
-        .border-sm-right-0 {
-          border-right: 0 !important;
-        }
-        .border-sm-bottom-0 {
-          border-bottom: 0 !important;
-        }
-        .border-sm-left-0 {
-          border-left: 0 !important;
-        }
-        .border-sm-x {
-          border-left: 1px solid #e3e7eb !important;
-          border-right: 1px solid #e3e7eb !important;
-        }
-        .border-sm-y {
-          border-top: 1px solid #e3e7eb !important;
-          border-bottom: 1px solid #e3e7eb !important;
-        }
-        .border-sm {
-          border-top: 1px solid #e3e7eb !important;
-          border-bottom: 1px solid #e3e7eb !important;
-          border-left: 1px solid #e3e7eb !important;
-          border-right: 1px solid #e3e7eb !important;
-        }
-        .border-sm-0 {
-          border-top: 0 !important;
-          border-bottom: 0 !important;
-          border-left: 0 !important;
-          border-right: 0 !important;
-        }
-      }
-
-      @media (min-width: 768px) {
-        .border-md-top {
-          border-top: 1px solid #e3e7eb !important;
-        }
-        .border-md-right {
-          border-right: 1px solid #e3e7eb !important;
-        }
-        .border-md-bottom {
-          border-bottom: 1px solid #e3e7eb !important;
-        }
-        .border-md-left {
-          border-left: 1px solid #e3e7eb !important;
-        }
-        .border-md-top-0 {
-          border-top: 0 !important;
-        }
-        .border-md-right-0 {
-          border-right: 0 !important;
-        }
-        .border-md-bottom-0 {
-          border-bottom: 0 !important;
-        }
-        .border-md-left-0 {
-          border-left: 0 !important;
-        }
-        .border-md-x {
-          border-left: 1px solid #e3e7eb !important;
-          border-right: 1px solid #e3e7eb !important;
-        }
-        .border-md-y {
-          border-top: 1px solid #e3e7eb !important;
-          border-bottom: 1px solid #e3e7eb !important;
-        }
-        .border-md {
-          border-top: 1px solid #e3e7eb !important;
-          border-bottom: 1px solid #e3e7eb !important;
-          border-left: 1px solid #e3e7eb !important;
-          border-right: 1px solid #e3e7eb !important;
-        }
-        .border-md-0 {
-          border-top: 0 !important;
-          border-bottom: 0 !important;
-          border-left: 0 !important;
-          border-right: 0 !important;
-        }
-      }
-
-      @media (min-width: 992px) {
-        .border-lg-top {
-          border-top: 1px solid #e3e7eb !important;
-        }
-        .border-lg-right {
-          border-right: 1px solid #e3e7eb !important;
-        }
-        .border-lg-bottom {
-          border-bottom: 1px solid #e3e7eb !important;
-        }
-        .border-lg-left {
-          border-left: 1px solid #e3e7eb !important;
-        }
-        .border-lg-top-0 {
-          border-top: 0 !important;
-        }
-        .border-lg-right-0 {
-          border-right: 0 !important;
-        }
-        .border-lg-bottom-0 {
-          border-bottom: 0 !important;
-        }
-        .border-lg-left-0 {
-          border-left: 0 !important;
-        }
-        .border-lg-x {
-          border-left: 1px solid #e3e7eb !important;
-          border-right: 1px solid #e3e7eb !important;
-        }
-        .border-lg-y {
-          border-top: 1px solid #e3e7eb !important;
-          border-bottom: 1px solid #e3e7eb !important;
-        }
-        .border-lg {
-          border-top: 1px solid #e3e7eb !important;
-          border-bottom: 1px solid #e3e7eb !important;
-          border-left: 1px solid #e3e7eb !important;
-          border-right: 1px solid #e3e7eb !important;
-        }
-        .border-lg-0 {
-          border-top: 0 !important;
-          border-bottom: 0 !important;
-          border-left: 0 !important;
-          border-right: 0 !important;
-        }
-      }
-
-      @media (min-width: 1200px) {
-        .border-xl-top {
-          border-top: 1px solid #e3e7eb !important;
-        }
-        .border-xl-right {
-          border-right: 1px solid #e3e7eb !important;
-        }
-        .border-xl-bottom {
-          border-bottom: 1px solid #e3e7eb !important;
-        }
-        .border-xl-left {
-          border-left: 1px solid #e3e7eb !important;
-        }
-        .border-xl-top-0 {
-          border-top: 0 !important;
-        }
-        .border-xl-right-0 {
-          border-right: 0 !important;
-        }
-        .border-xl-bottom-0 {
-          border-bottom: 0 !important;
-        }
-        .border-xl-left-0 {
-          border-left: 0 !important;
-        }
-        .border-xl-x {
-          border-left: 1px solid #e3e7eb !important;
-          border-right: 1px solid #e3e7eb !important;
-        }
-        .border-xl-y {
-          border-top: 1px solid #e3e7eb !important;
-          border-bottom: 1px solid #e3e7eb !important;
-        }
-        .border-xl {
-          border-top: 1px solid #e3e7eb !important;
-          border-bottom: 1px solid #e3e7eb !important;
-          border-left: 1px solid #e3e7eb !important;
-          border-right: 1px solid #e3e7eb !important;
-        }
-        .border-xl-0 {
-          border-top: 0 !important;
-          border-bottom: 0 !important;
-          border-left: 0 !important;
-          border-right: 0 !important;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="/style/style.css" />
+    <link rel="stylesheet" href="/style/atomic.css" />
+    <title>Galley</title>
   </head>
   <body>
     <header class="position-fixed w-100">
@@ -259,9 +53,9 @@
             <div class="d-flex gap-1 gap-md-3 flex-column flex-md-row">
               <ul class="navbar-nav d-flex gap-1 gap-md-3 mb-3 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="/"
-                    >Home</a
-                  >
+                  <a class="nav-link active" aria-current="page" href="/">
+                    Home
+                  </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/newest">Newest</a>
@@ -270,13 +64,26 @@
                   <a class="nav-link" href="/top-rated">Top rated</a>
                 </li>
               </ul>
-              <div class="d-flex gap-1 gap-md-3">
-                <a href="/login">
-                  <button class="ml-5 btn btn-outline-dark">Login</button>
+              <div
+                id="button-wrapper-logged"
+                class="d-flex gap-1 gap-md-3 d-none"
+              >
+                <a href="/my-account">
+                  <button class="ml-5 btn btn-outline-dark">My account</button>
                 </a>
-                <a href="/register">
-                  <button class="btn btn-dark">Register</button>
+                <a href="/logout">
+                  <button class="btn btn-dark">Logout</button>
                 </a>
+              </div>
+              <div id="button-wrapper" class="d-flex gap-1 gap-md-3 d-none">
+                <div id="button-wrapper" class="d-flex gap-1 gap-md-3">
+                  <a href="/login">
+                    <button class="ml-5 btn btn-outline-dark">Login</button>
+                  </a>
+                  <a href="/register">
+                    <button class="btn btn-dark">Register</button>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -284,5 +91,38 @@
       </nav>
     </header>
     <div router-view></div>
+
+    <div id="fab" class="fab-container d-none">
+      <div class="fab shadow">
+        <a href="/add-photo">
+          <div class="fab-content">
+            <i class="text-light bi bi-list h3 m-0"></i>
+          </div>
+        </a>
+      </div>
+
+      <div class="sub-button p-0 shadow">
+        <a
+          href="google.com"
+          class="px-3"
+          data-bs-toggle="tooltip"
+          data-bs-placement="left"
+          title="Photos"
+        >
+          <i class="text-light bi bi-image-fill h5"></i>
+        </a>
+      </div>
+      <div class="sub-button p-0 shadow">
+        <a
+          href="google.com"
+          class="px-3"
+          data-bs-toggle="tooltip"
+          data-bs-placement="left"
+          title="Albums"
+        >
+          <i class="text-light bi bi-folder-fill h5"></i>
+        </a>
+      </div>
+    </div>
   </body>
 </html>

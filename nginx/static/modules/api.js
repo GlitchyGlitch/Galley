@@ -31,7 +31,6 @@ class API {
   login = async (email, password) => {
     let resp = null;
     const path = joinPaths([this.apiPath, "login"]);
-    console.log(JSON.stringify({ email, password }));
     const req = new Request(path, {
       method: "POST",
       cache: "default",

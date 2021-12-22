@@ -4,6 +4,9 @@ export default View({
   name: "login",
   async mainFunc(root, { api, cookieManager }) {
     //TODO: ADD validation
+    if (cookieManager.getJWT()) {
+      window.location.replace("/");
+    }
     root.querySelector("#form").addEventListener("submit", async () => {
       const email = root.querySelector("#email");
       const passwd = root.querySelector("#passwd");
@@ -19,6 +22,7 @@ export default View({
         feedback.classList.add("d-none");
         email.classList.add("is-valid");
         passwd.classList.add("is-valid");
+        cookieManager.setJWT(resp.jwt);
         window.location.replace("/");
       }
     });
