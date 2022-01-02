@@ -1,4 +1,5 @@
 import View from "/modules/view.js";
+import Thumbnail from "/components/thumbnail/thumbnail.js";
 
 export default View({
   name: "home",
@@ -7,16 +8,16 @@ export default View({
     const photos = await api.fetchPhotos();
     const cards = [];
     for (const photo of photos) {
-      console.log(photo);
-      const el = document.createElement("div");
-      const inner = document.createElement("img");
-      inner.src = photo.path;
-      inner.classList.add("w-100", "h-100");
-      inner.style.objectFit = "cover";
-      el.appendChild(inner);
-      el.classList.add("col-12", "col-md-6", "col-xl-4", "py-3", "px-md-3");
-      el.style.height = "240px";
-      cards.push(el);
+      let thumbnail = Thumbnail.new();
+      let date = new Date(photo.created_at);
+      console.log(date.getYear());
+      date = `${date.getDay()}.${date.getMonth()}.${date.getFullYear()}`;
+      thumbnail.fill({ src: photo.path, date: date });
+      console.log(
+        "🚀 ~ file: home.js ~ line 13 ~ mainFunc ~ photo.createdAt",
+        photo.createdAt
+      );
+      cards.push(thumbnail.render());
     }
     cards.map((card) => wrapper.appendChild(card)); //TODO: Make it appear at once
   },
