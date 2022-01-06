@@ -29,7 +29,20 @@ class PhotoRepository
       exit($e->getMessage()); //TODO: Hendle errors properly
     }
   }
-
+  public function get_by_id($id)
+  {
+    $query = 'SELECT * FROM photos WHERE id = uuid_to_bin(:id)';
+    try {
+      $sth = $this->dbh->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+      $sth->execute([':id' => $id,]);
+      $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+      $photo = new Photo();
+      $photo->array_load($result[0]);
+      return $photo;
+    } catch (PDOException $e) {
+      exit($e->getMessage()); //TODO: Hendle errors properly
+    }
+  }
   public function get_img_by_id($id, $width = 0, $height = 0)
   {
     $query = 'SELECT path, mime FROM photos WHERE id=uuid_to_bin(:id)'; //FIXME: returns empty

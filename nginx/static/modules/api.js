@@ -28,6 +28,16 @@ class API {
     return resp.json();
   };
 
+  fetchPhotoByID = async (id) => {
+    const path = joinPaths([this.apiPath, "photos", id]);
+    const req = new Request(path, {
+      method: "GET",
+      cache: "default",
+    });
+    const resp = await fetch(req);
+    return resp.json();
+  };
+
   login = async (email, password) => {
     let resp = null;
     const path = joinPaths([this.apiPath, "login"]);
