@@ -1,19 +1,40 @@
 import View from "/modules/view.js";
 import Thumbnail from "/components/thumbnail/thumbnail.js";
 import Lightbox from "/components/lightbox/lightbox.js";
-import { showScrollbar, hideScrollbar } from "../../modules/style.js";
+import Comment from "/components/comment/comment.js";
+import { showScrollbar, hideScrollbar } from "/modules/style.js";
+import { convertDate } from "/modules/utils.js";
 
 export default View({
   name: "home",
   mainFunc(root, { api }) {
     const showLightbox = async (id) => {
       hideScrollbar();
-      const lightbox = Lightbox.new();
       const photo = await api.fetchPhotoByID(id);
-      lightbox.fill({ src: photo.path });
-      const lightboxNode = lightbox.render();
-      lightboxNode.querySelector(".overlay").addEventListener("click", (e) => {
-        root.removeChild(e.target.parentNode);
+      const comments = await api.fetchCommentsByPhotoID(id);
+      const commentsComponents = await Promise.all(
+        comments.map(async (comment) => {
+          const user = await api.fetchUserByID(comment.owner_id);
+          const commentComponent = Comment.new();
+
+          commentComponent.fill({
+            content: comment.content,
+            firstName: user.first_name,
+            lastName: user.last_name,
+          });
+
+          return commentComponent;
+        })
+      );
+
+      const lightboxComponent = Lightbox.new();
+      lightboxComponent.fill({
+        src: photo.path,
+        comments: commentsComponents,
+      });
+      const lightboxNode = lightboxComponent.render();
+      lightboxNode.querySelector("#exit").addEventListener("click", (e) => {
+        root.removeChild(root.querySelector(".lightbox"));
         showScrollbar();
       });
       root.appendChild(lightboxNode);
@@ -25,16 +46,17 @@ export default View({
 
       for (const photo of photos) {
         let thumbnail = Thumbnail.new();
-        let date = new Date(photo.created_at);
-        date = `${date.getDay()}.${date.getMonth()}.${date.getFullYear()}`;
-        thumbnail.fill({ src: photo.path, date: date });
+        thumbnail.fill({
+          src: photo.path,
+          date: convertDate(photo.created_at),
+        });
         const thumbnailNode = thumbnail.render();
         thumbnailNode
           .querySelector(".overlay")
           .addEventListener("click", () => {
-            console.log(photo.id);
             showLightbox(photo.id);
           });
+
         wrapper.appendChild(thumbnailNode);
       }
     };

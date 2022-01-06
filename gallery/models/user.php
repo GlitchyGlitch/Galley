@@ -10,7 +10,7 @@ class UserInput extends Model
   public $role;
 }
 
-class User extends Model
+class User extends Model // FIXME: Validation for user
 {
   public $id;
   public $first_name;
@@ -18,4 +18,12 @@ class User extends Model
   public $email;
   public $passwd_hash;
   public $role;
+}
+
+class UserList extends ModelList
+{
+  public function __construct()
+  {
+    parent::set_type("User");
+  }
 }

@@ -1,4 +1,4 @@
-import { joinPaths } from "/modules/path.js";
+import { joinPaths } from "/modules/utils.js";
 
 /**
  * @description
@@ -18,8 +18,28 @@ class API {
     this.apiPath = joinPaths(["/", this.apiRoot, this.apiVersion]);
   }
 
+  fetchUserByID = async (id) => {
+    const path = joinPaths([this.apiPath, "users", id]);
+    const req = new Request(path, {
+      method: "GET",
+      cache: "default",
+    });
+    const resp = await fetch(req);
+    return resp.json();
+  };
+
   fetchPhotos = async () => {
     const path = joinPaths([this.apiPath, "photos"]);
+    const req = new Request(path, {
+      method: "GET",
+      cache: "default",
+    });
+    const resp = await fetch(req);
+    return resp.json();
+  };
+
+  fetchCommentsByPhotoID = async (id) => {
+    const path = joinPaths([this.apiPath, "photos", id, "comments"]);
     const req = new Request(path, {
       method: "GET",
       cache: "default",

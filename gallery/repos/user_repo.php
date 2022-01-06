@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '../../models/user.php';
 
 define("BCRYPT_COST", 16); //TODO: move to config module later on
 
@@ -9,6 +10,44 @@ class UserRepository
   public function __construct($dbh)
   {
     $this->dbh = $dbh;
+  }
+
+  public function get_all($limit = 50, $offset = 0)
+  {
+    $query = 'SELECT (id, first_name, last_name, email, role) FROM users ORDER BY id DESC LIMIT :offset, :limit'; //FIXME: returns empty
+    try {
+      $sth = $this->dbh->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+      $sth->execute([
+        ':limit' => $limit,
+        ':offset' => $offset,
+      ]);
+      $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+      $user_list = new UserList();
+      $user_list->array_load($result);
+      return $user_list;
+    } catch (PDOException $e) {
+      exit($e->getMessage()); //TODO: Hendle errors properly
+    }
+  }
+
+  public function get_by_id($id, $extended = false)
+  {
+    if ($extended) {
+      $query = 'SELECT (id, first_name, last_name, email, role) FROM users WHERE id = uuid_to_bin(:id)';
+    } else {
+      $query = 'SELECT * FROM users WHERE id = uuid_to_bin(:id)'; // FIXME: get only id first and last name
+    }
+
+    try {
+      $sth = $this->dbh->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+      $sth->execute([':id' => $id]);
+      $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+      $user = new User();
+      $user->array_load($result[0]);
+      return $user;
+    } catch (PDOException $e) {
+      exit($e->getMessage()); //TODO: Hendle errors properly
+    }
   }
 
   public function insert($user_input)

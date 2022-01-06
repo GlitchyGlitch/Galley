@@ -17,8 +17,12 @@
 <div
   class="lightbox position-fixed d-flex justify-content-center align-items-center vh-100 w-100 top-0"
 >
-  <div class="position-absolute top-0 end-0 h-100 w-25 bg-white"></div>
+  <div class="position-absolute top-0 end-0 h-100 w-25 bg-white p-3">
+    <div id="exit">X</div>
+    {{comments}}
+  </div>
   <div
+    id="background"
     class="overlay d-flex align-items-center position-absolute top-0 start-0 h-100 w-75 p-5"
   >
     <div

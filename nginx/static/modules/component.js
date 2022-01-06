@@ -1,3 +1,5 @@
+import { isComponentArray } from "./utils.js";
+
 /**
  * @description
  * Main component class.
@@ -16,6 +18,7 @@ class Component {
       this.template = template;
     }
   }
+
   loadTemplate = async () => {
     const req = new Request(this.htmlFile, {
       method: "GET",
@@ -28,14 +31,23 @@ class Component {
 
   fill = (values) => {
     let html = this.template;
-    for (var value in values) {
-      html = html.replace(RegExp("{{" + value + "}}", "g"), values[value]);
+    for (const value in values) {
+      let val =
+        values[value] instanceof Component ? values[value].html : values[value];
+      if (isComponentArray(val)) {
+        val = val.reduce(
+          (accumulator, current) => accumulator.html + current.html
+        ).html;
+      }
+      html = html.replace(RegExp("{{" + value + "}}", "g"), val);
     }
     this.html = html;
   };
+
   render = () => {
     return document.createRange().createContextualFragment(this.html);
   };
+
   new = () => {
     return new Component(this.options, this.template);
   };

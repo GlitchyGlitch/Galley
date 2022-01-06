@@ -1,4 +1,4 @@
-import { joinPaths } from "/modules/path.js";
+import { joinPaths } from "/modules/utils.js";
 
 const createView = (options) => {
   const c = new View(options);
