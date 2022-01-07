@@ -33,11 +33,19 @@ export default View({
         comments: commentsComponents,
       });
       const lightboxNode = lightboxComponent.render();
-      lightboxNode.querySelector("#exit").addEventListener("click", (e) => {
-        root.removeChild(root.querySelector(".lightbox"));
-        showScrollbar();
-      });
+      lightboxNode
+        .querySelector("#exit")
+        .addEventListener("click", hideLightbox);
+      lightboxNode
+        .querySelector("#background")
+        .addEventListener("click", hideLightbox);
+
       root.appendChild(lightboxNode);
+    };
+
+    const hideLightbox = () => {
+      root.removeChild(root.querySelector(".lightbox"));
+      showScrollbar();
     };
 
     const renderThubnails = async () => {
