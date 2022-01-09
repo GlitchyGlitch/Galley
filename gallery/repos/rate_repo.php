@@ -20,7 +20,6 @@ class RateRepository
         ':limit' => $limit,
         ':offset' => $offset,
       ]);
-      $query = 'SELECT * FROM rates WHERE photo_id = uuid_to_bin(:id) ORDER BY created_at DESC LIMIT :offset, :limit'; //FIXME: returns empty
       $result = $sth->fetchAll(PDO::FETCH_ASSOC);
       $rates_list = new RateList();
       $rates_list->array_load($result);

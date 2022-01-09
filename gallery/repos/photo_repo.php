@@ -66,6 +66,25 @@ class PhotoRepository
     }
   }
 
+  public function get_photos_by_user_id($id, $limit = 50, $offset = 0)
+  {
+    $query = 'SELECT * FROM photos WHERE owner_id = uuid_to_bin(:id) ORDER BY created_at DESC LIMIT :offset, :limit'; //FIXME: returns empty
+    try {
+      $sth = $this->dbh->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+      $sth->execute([
+        ':id' => $id,
+        ':limit' => $limit,
+        ':offset' => $offset,
+      ]);
+      $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+      $photo_list = new PhotoList();
+      $photo_list->array_load($result);
+      return $photo_list;
+    } catch (PDOException $e) {
+      exit($e->getMessage()); //TODO: Hendle errors properly
+    }
+  }
+
   public function insert($photo) //TODO: Change it to transaction. Handle errors
   {
     $photo->id = gen_uuidv4();

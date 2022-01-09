@@ -28,6 +28,16 @@ class API {
     return resp.json();
   };
 
+  fetchPhtotosByUserID = async (id) => {
+    const path = joinPaths([this.apiPath, "users", id, "photos"]);
+    const req = new Request(path, {
+      method: "GET",
+      cache: "default",
+    });
+    const resp = await fetch(req);
+    return resp.json();
+  };
+
   fetchPhotos = async () => {
     const path = joinPaths([this.apiPath, "photos"]);
     const req = new Request(path, {

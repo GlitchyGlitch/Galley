@@ -4,6 +4,7 @@ import Router from "/modules/router.js";
 import RegisterView from "/views/register/register.js";
 import LoginView from "/views/login/login.js";
 import HomeView from "/views/home/home.js";
+import MyPhotosView from "/views/my-photos/my-photos.js";
 import API from "/modules/api.js";
 import CookieManager from "/modules/cookie-manager.js";
 
@@ -46,6 +47,11 @@ const main = () => {
       LoginView.routerViewport(routerViewport);
       await LoginView.init({ api, cookieManager });
       router.renderViewport(LoginView.node);
+    })
+    .add(/my-photos/, async () => {
+      MyPhotosView.routerViewport(routerViewport);
+      await MyPhotosView.init({ api, cookieManager });
+      router.renderViewport(MyPhotosView.node);
     })
     .add(/register/, async () => {
       RegisterView.routerViewport(routerViewport);
