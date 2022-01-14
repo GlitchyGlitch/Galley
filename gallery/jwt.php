@@ -28,11 +28,13 @@ function is_valid_jwt($jwt, $secret = DEFAULT_JWT_SECRET)
 {
   // TODO: Handle invalid JWTs
   $tokenParts = explode('.', $jwt);
-  $header = base64_decode($tokenParts[0]);
-  $payload = base64_decode($tokenParts[1]);
-  $signature_provided = $tokenParts[2];
+  $header = base64_decode($tokenParts[0] ?? null);
+  $payload = base64_decode($tokenParts[1] ?? null);
+  $signature_provided = $tokenParts[2] ?? null;
 
-  $expiration = json_decode($payload)->exp;
+  $is_format_valid = !is_null($header) && !is_null($payload) && !is_null($signature_provided);
+
+  $expiration = json_decode($payload)->exp ?? null;
   $is_token_expired = ($expiration - time()) < 0;
 
   $base64_url_header = base64url_encode($header);
@@ -41,7 +43,7 @@ function is_valid_jwt($jwt, $secret = DEFAULT_JWT_SECRET)
   $base64_url_signature = base64url_encode($signature);
 
   $is_signature_valid = ($base64_url_signature === $signature_provided);
-  if (!$is_token_expired && $is_signature_valid) {
+  if (!$is_token_expired && $is_signature_valid && $is_format_valid) {
     return true;
   }
   return false;

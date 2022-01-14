@@ -15,11 +15,40 @@
 </div> -->
 
 <div
+  id="lightbox"
   class="lightbox position-fixed d-flex justify-content-center align-items-center vh-100 w-100 top-0"
+  style="z-index: 1"
 >
-  <div class="position-absolute top-0 end-0 h-100 w-25 bg-white p-3">
-    <div id="exit">X</div>
-    {{comments}}
+  <div
+    class="overflow-auto position-absolute top-0 end-0 h-100 w-25 bg-white p-4"
+  >
+    <div class="d-flex justify-content-between">
+      <h4 class="my-4">Comments</h4>
+      <i
+        id="exit"
+        class="bi bi-x h1 m-0 d-flex align-items-center"
+        style="cursor: pointer"
+      ></i>
+    </div>
+
+    <div id="comment-wrapper">{{comments}}</div>
+    <form id="comment-form" action="javascript:void(0);" class="d-none">
+      <textarea
+        id="comment-input"
+        class="form-control mt-3"
+        placeholder="Leave a comment here"
+        style="resize: none"
+        required
+      ></textarea>
+      <button
+        id="comment-button"
+        type="submit"
+        class="btn btn-dark mt-3 btn btn-dark d-flex align-items-center gap-3"
+      >
+        <div>Publish</div>
+        <i class="bi bi-arrow-right-circle-fill"></i>
+      </button>
+    </form>
   </div>
   <div
     id="background"

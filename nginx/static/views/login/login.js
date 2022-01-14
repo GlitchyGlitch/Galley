@@ -4,6 +4,9 @@ export default View({
   name: "login",
   async mainFunc(root, { api, cookieManager }) {
     //TODO: ADD validation
+    if (cookieManager.isLogged()) {
+      window.location.replace("/");
+    }
 
     root.querySelector("#form").addEventListener("submit", async () => {
       const email = root.querySelector("#email");

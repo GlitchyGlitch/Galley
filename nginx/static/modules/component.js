@@ -29,23 +29,28 @@ class Component {
     this.template = response;
   };
 
-  fill = (values) => {
+  fill = (fill) => {
     let html = this.template;
-    for (const value in values) {
-      let val =
-        values[value] instanceof Component ? values[value].html : values[value];
-      if (isComponentArray(val)) {
-        val = val.reduce(
-          (accumulator, current) => accumulator.html + current.html
-        ).html;
+    for (const marker in fill) {
+      let value =
+        fill[marker] instanceof Component ? fill[marker].html : fill[marker];
+      if (isComponentArray(value)) {
+        let result = "";
+        for (const v of value) {
+          result += v.html;
+        }
+        value = result;
       }
-      html = html.replace(RegExp("{{" + value + "}}", "g"), val);
+      html = html.replace(RegExp("{{" + marker + "}}", "g"), value);
     }
     this.html = html;
   };
 
   render = () => {
-    return document.createRange().createContextualFragment(this.html);
+    return document
+      .createRange()
+      .createContextualFragment(this.html)
+      .querySelector(`#${this.options.name.toLowerCase()}`);
   };
 
   new = () => {

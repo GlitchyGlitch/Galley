@@ -7,6 +7,12 @@ class CookieManager {
   getUserID() {
     return JSON.parse(atob(this.getJWT().split(".")[1])).sub;
   }
+  isLogged() {
+    if (!this.getJWT()) {
+      return false;
+    }
+    return true;
+  }
   getJWT() {
     try {
       const parameterArray = document.cookie.split(";");

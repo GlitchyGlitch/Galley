@@ -30,9 +30,11 @@ const main = () => {
   });
   const routerViewport = document.querySelector("[router-view]");
   const router = new Router({ viewport: routerViewport });
-  const api = new API();
   const cookieManager = new CookieManager();
-  if (!cookieManager.getJWT()) {
+  const api = new API({
+    cookieManager,
+  });
+  if (!cookieManager.isLogged()) {
     renderButtons(false);
   } else {
     renderButtons(true);
@@ -60,7 +62,7 @@ const main = () => {
     })
     .add("", async () => {
       HomeView.routerViewport(routerViewport);
-      await HomeView.init({ api });
+      await HomeView.init({ api, cookieManager });
       router.renderViewport(HomeView.node);
     });
 };

@@ -47,7 +47,6 @@ class Endpoint
   {
     $header = get_authorization_header();
     $token = null;
-
     if (empty($header)) {
       return;
     }

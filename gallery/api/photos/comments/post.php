@@ -5,6 +5,7 @@ require_once __DIR__ . "/../../../exceptions.php";
 $ep = new Endpoint();
 $ep->require_user();
 $comment = new Comment();
+
 try {
   $comment->json_load($ep->body);
 } catch (LoadingException $e) {
@@ -12,6 +13,7 @@ try {
 }
 
 if (!$comment->validate(true)) {
+  echo "chuj $ep->body";
   $ep->send_code(400);
 }
 

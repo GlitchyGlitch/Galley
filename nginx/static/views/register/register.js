@@ -3,7 +3,7 @@ import View from "/modules/view.js";
 export default View({
   name: "register",
   mainFunc(root, { cookieManager, api }) {
-    if (cookieManager.getJWT()) {
+    if (cookieManager.isLogged()) {
       window.location.replace("/");
     }
 
