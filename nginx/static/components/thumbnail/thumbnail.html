@@ -1,6 +1,10 @@
 <div id="thumbnail" class="thumbnail col-12 col-md-6 col-xl-4 py-3 px-md-3">
-  <img class="w-100 h-100" style="object-fit: cover" src="{{src}}" alt="" />
-  <div class="overlay w-100 h-100 p-3 d-flex align-items-end text-white">
-    <div><i class="bi bi-clock-fill me-2"></i>{{date}}</div>
+  <div class="thumbnail-hover position-relative w-100 h-100">
+    <img class="w-100 h-100" style="object-fit: cover" src="{{src}}" alt="" />
+    <div
+      class="overlay top-0 l-0 w-100 h-100 p-3 d-flex align-items-end text-white position-absolute overflow-hidden"
+    >
+      <div><i class="bi bi-clock-fill me-2"></i>{{date}}</div>
+    </div>
   </div>
 </div>

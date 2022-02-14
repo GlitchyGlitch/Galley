@@ -80,20 +80,17 @@ body {
 .fab-container .sub-button {
   padding-top: 6px;
 }
-
-.thumbnail .overlay {
-  transform: translateY(-100%);
-  background-color: #0000;
-  transition: background-color 0.15s ease-in-out, opacity 0.15s ease-in-out;
+.thumbnail-hover {
   cursor: pointer;
-  opacity: 0;
 }
-
-.thumbnail .overlay:hover {
+.thumbnail-hover .overlay {
+  opacity: 0;
   background-color: #0007;
+  transition: all 0.15s ease-in-out;
+}
+.thumbnail-hover:hover .overlay {
   opacity: 1;
 }
-
 .lightbox .overlay {
   background-color: #000b;
 }

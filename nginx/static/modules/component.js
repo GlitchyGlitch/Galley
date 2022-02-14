@@ -10,6 +10,7 @@ import { isComponentArray } from "./utils.js";
  */
 class Component {
   constructor(options, template = "") {
+    this.html = "";
     this.options = options;
     this.htmlFile = `/components/${options.name}/${options.name}.html`;
     if (!template) {
@@ -47,6 +48,9 @@ class Component {
   };
 
   render = () => {
+    if (this.html === "") {
+      this.fill();
+    }
     return document
       .createRange()
       .createContextualFragment(this.html)
