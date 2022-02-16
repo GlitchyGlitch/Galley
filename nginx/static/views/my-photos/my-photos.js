@@ -11,7 +11,7 @@ export default View({
     thumbnailNodes.map((n) => wrapper.appendChild(n));
     const dragdrop = Dragdrop.new();
     const dragdropNode = dragdrop.render();
-    dragdropInit(api, dragdropNode);
+    dragdropInit(root, api, cookieManager, dragdropNode);
     wrapper.appendChild(dragdropNode);
   },
 });

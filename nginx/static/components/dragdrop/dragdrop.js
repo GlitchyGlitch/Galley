@@ -1,3 +1,4 @@
+import { renderThumbnail } from "/components/thumbnail/thumbnail.js";
 import Component from "/modules/component.js";
 import { fileToBase64 } from "/modules/utils.js";
 
@@ -5,8 +6,7 @@ const Dragdrop = new Component({
   name: "dragdrop",
 });
 
-const dragdropInit = (api, dragdropNode) => {
-  const fileInput = dragdropNode.querySelector("#file-input");
+const dragdropInit = (root, api, cookieManager, dragdropNode) => {
   const box = dragdropNode.querySelector("#dragdrop-box");
   const info = dragdropNode.querySelector("#dragdrop-info");
   const infoDefMsg = info.innerHTML;
@@ -34,6 +34,10 @@ const dragdropInit = (api, dragdropNode) => {
     }
     console.log(fileBase64);
     const resp = await api.postPhoto(fileBase64.mime, fileBase64.data);
+    console.log(resp);
+    root
+      .querySelector("#photo-wrapper")
+      .prepend(renderThumbnail(root, api, cookieManager, resp));
   });
 };
 
