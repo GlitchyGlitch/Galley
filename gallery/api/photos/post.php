@@ -5,6 +5,7 @@ require_once "../../exceptions.php";
 
 $ep = new Endpoint();
 $ep->require_user();
+
 $photo = new Photo();
 try {
   $photo->json_load($ep->body);

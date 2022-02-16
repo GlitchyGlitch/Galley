@@ -41,4 +41,16 @@ const convertDate = (dateStr) => {
   return [day, month, year].join(".");
 };
 
-export { joinPaths, isComponentArray, convertDate };
+const fileToBase64 = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () =>
+      resolve({
+        mime: file.type,
+        data: reader.result.split(",")[1],
+      });
+    reader.onerror = (error) => reject(error);
+  });
+
+export { joinPaths, isComponentArray, convertDate, fileToBase64 };

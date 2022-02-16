@@ -90,6 +90,30 @@ class API {
     return resp.json();
   };
 
+  postPhoto = async (mime, data) => {
+    //TODO: check at least extension of file
+    console.log("here");
+
+    const path = joinPaths([this.apiPath, "photos"]);
+    const jwt = this.cookieManager.getJWT();
+    const headers = {
+      "Contnet-Type": "application/json;charset=UTF-8",
+    };
+    if (jwt) {
+      headers.Authorization = `Bearer ${jwt}`;
+    }
+    const req = new Request(path, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify({
+        base64_img: data,
+        mime,
+      }),
+    });
+    const resp = await fetch(req);
+    return resp.json();
+  };
+
   login = async (email, password) => {
     let resp = null;
     const path = joinPaths([this.apiPath, "login"]);
