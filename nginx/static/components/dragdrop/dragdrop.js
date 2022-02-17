@@ -32,9 +32,7 @@ const dragdropInit = (root, api, cookieManager, dragdropNode) => {
     } finally {
       info.innerHTML = infoDefMsg;
     }
-    console.log(fileBase64);
     const resp = await api.postPhoto(fileBase64.mime, fileBase64.data);
-    console.log(resp);
     root
       .querySelector("#photo-wrapper")
       .prepend(renderThumbnail(root, api, cookieManager, resp));

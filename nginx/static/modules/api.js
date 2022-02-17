@@ -92,7 +92,6 @@ class API {
 
   postPhoto = async (mime, data) => {
     //TODO: check at least extension of file
-    console.log("here");
 
     const path = joinPaths([this.apiPath, "photos"]);
     const jwt = this.cookieManager.getJWT();
