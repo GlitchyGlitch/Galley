@@ -13,7 +13,6 @@ try {
 }
 
 if (!$comment->validate(true)) {
-  echo "chuj $ep->body";
   $ep->send_code(400);
 }
 
