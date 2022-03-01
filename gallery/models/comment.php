@@ -23,7 +23,7 @@ class Comment extends Model implements ModelInterface
   }
   public function validate_content(): bool
   {
-    if (trim($this->content) != "" && !(strlen($this->content) > 510) && preg_match('/^[0-9a-zA-Ząćęłńóśźż!.?]+$/u', $this->content)) {
+    if (trim($this->content) != "" && !(strlen($this->content) > 510) && preg_match('/^[0-9a-zA-Ząćęłńóśźż!.,? ]+$/u', $this->content)) {
       return true;
     }
     return false;
